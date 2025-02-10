@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MUser extends Authenticatable implements JWTSubject
 {
     use SoftDeletes, HasFactory;
-    protected $fillable = ['first_name', 'last_name', 'username', 'email', 'password', 'id_m_roles', 'obj_type', 'created_by', 'obj_type'];
+    protected $fillable = ['first_name', 'last_name', 'username', 'email', 'password', 'id_m_roles', 'obj_type', 'created_by'];
     protected $hidden = ['password'];
 
 
