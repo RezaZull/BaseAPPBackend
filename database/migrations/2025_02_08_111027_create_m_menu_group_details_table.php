@@ -10,9 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('m_role_menus', function (Blueprint $table) {
+        Schema::create('m_menu_group_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_m_roles');
+            $table->unsignedBigInteger('id_m_menu_groups');
             $table->unsignedBigInteger('id_m_menus');
             $table->boolean("flag_create");
             $table->boolean("flag_read");
@@ -35,6 +35,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('m_role_menus');
+        Schema::dropIfExists('m_menu_group_details');
     }
 };

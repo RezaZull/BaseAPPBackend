@@ -19,28 +19,28 @@ class MMenuSeeder extends Seeder
                 'name' => "Master Menu",
                 'description' => "Master Menu",
                 'obj_type' => '1',
-                'created_by' => "DUMMY",
+                'created_by' => "SYSTEM",
                 'created_at' => Carbon::now()
             ],
             [
                 'name' => "Master User",
                 'description' => "Master User",
                 'obj_type' => '1',
-                'created_by' => "DUMMY",
+                'created_by' => "SYSTEM",
                 'created_at' => Carbon::now()
             ],
             [
                 'name' => "Master Role",
                 'description' => "Master Role User",
                 'obj_type' => '1',
-                'created_by' => "DUMMY",
+                'created_by' => "SYSTEM",
                 'created_at' => Carbon::now()
             ],
             [
-                'name' => "Master Role Menu",
+                'name' => "Master Menu Grup",
                 'description' => "Master Role Menu Privilage",
                 'obj_type' => '1',
-                'created_by' => "DUMMY",
+                'created_by' => "SYSTEM",
                 'created_at' => Carbon::now()
             ],
         ]);

@@ -24,7 +24,7 @@ class MUserFactory extends Factory
             'email' => fake()->email,
             'password' => Hash::make('admin123'),
             'id_m_roles' => rand(1, 2),
-            'obj_type' => 4,
+            'obj_type' => 5,
             'created_by' => "DUMMY",
         ];
     }

@@ -7,7 +7,8 @@ abstract class Controller
     protected $objTypes = [
         "M_Menu" => "1",
         "M_Role" => "2",
-        "M_RoleMenu" => "3",
-        "M_User" => "4",
+        "M_Menu_Group" => "3",
+        "M_Menu_Group_Detail" => "4",
+        "M_User" => "5",
     ];
 }

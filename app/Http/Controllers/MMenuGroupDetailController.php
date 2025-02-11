@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MRoleMenu;
 use Illuminate\Http\Request;
 
-class MRoleMenuController extends Controller
+class MMenuGroupDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +25,7 @@ class MRoleMenuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MRoleMenu $mRoleMenu)
+    public function show(string $id)
     {
         //
     }
@@ -34,7 +33,7 @@ class MRoleMenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MRoleMenu $mRoleMenu)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class MRoleMenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MRoleMenu $mRoleMenu)
+    public function destroy(string $id)
     {
         //
     }

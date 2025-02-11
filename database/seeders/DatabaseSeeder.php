@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             MUserSeeder::class,
             MRoleSeeder::class,
             MMenuSeeder::class,
-            MRoleMenuSeeder::class
+            MMenuGroupSeeder::class,
+            MMenuGroupDetailSeeder::class
         ]);
         User::factory()->create([
             'name' => 'Test User',
