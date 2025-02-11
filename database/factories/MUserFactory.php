@@ -25,7 +25,7 @@ class MUserFactory extends Factory
             'password' => Hash::make('admin123'),
             'id_m_roles' => rand(1, 2),
             'obj_type' => 5,
-            'created_by' => "DUMMY",
+            'created_by' => "SYSTEM",
         ];
     }
 }

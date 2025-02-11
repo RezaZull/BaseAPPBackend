@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MMenuGroupDetail;
 use Illuminate\Http\Request;
 
 class MMenuGroupDetailController extends Controller
@@ -25,7 +26,7 @@ class MMenuGroupDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(MMenuGroupDetail $mMenuGroupDetail)
     {
         //
     }
@@ -33,7 +34,7 @@ class MMenuGroupDetailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, MMenuGroupDetail $mMenuGroupDetail)
     {
         //
     }
@@ -41,7 +42,7 @@ class MMenuGroupDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(MMenuGroupDetail $mMenuGroupDetail)
     {
         //
     }

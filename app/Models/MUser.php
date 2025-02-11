@@ -4,15 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MUser extends Authenticatable implements JWTSubject
 {
     use SoftDeletes, HasFactory;
-    protected $fillable = ['first_name', 'last_name', 'username', 'email', 'password', 'id_m_roles', 'obj_type', 'created_by'];
-    protected $hidden = ['password'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'username',
+        'email',
+        'password',
+        'id_m_roles',
+        'obj_type',
+        'created_by',
+        'updated_by',
+        'deleted_by'
+    ];
+    protected $hidden = [
+        'password',
+        "obj_type",
+        "created_at",
+        "updated_at",
+        "deleted_at",
+        "created_by",
+        "updated_by",
+        "deleted_by"
+    ];
 
 
     /**

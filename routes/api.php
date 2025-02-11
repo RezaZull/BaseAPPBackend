@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\MMenuController;
+use App\Http\Controllers\MMenuGroupController;
+use App\Http\Controllers\MMenuGroupDetailController;
 use App\Http\Controllers\MRoleController;
-use App\Http\Controllers\MRoleMenuController;
 use App\Http\Controllers\MUserController;
 use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Http\Request;
@@ -17,9 +18,10 @@ Route::post("/login", [MUserController::class, "login"])->name("login");
 Route::middleware([JwtMiddleware::class])->group(function () {
     Route::post("/logout", [MUserController::class, "logout"])->name("logout");
     Route::apiResources([
-        'user' => MUserController::class,
-        'menu' => MMenuController::class,
-        'role' => MRoleController::class,
-        'rolemenu' => MRoleMenuController::class,
+        'mUser' => MUserController::class,
+        'mMenu' => MMenuController::class,
+        'mRole' => MRoleController::class,
+        'mMenugroup' => MMenuGroupController::class,
+        'mMenugroupdetail' => MMenuGroupDetailController::class,
     ]);
 });

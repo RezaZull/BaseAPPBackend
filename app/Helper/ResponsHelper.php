@@ -15,6 +15,7 @@ class ResponsHelper
         return response()->json(
             [
                 'status' => 200,
+                'success' => true,
                 'message' => $message,
                 'data' => $data,
                 'access_token' => [
@@ -32,6 +33,7 @@ class ResponsHelper
         return response()->json(
             [
                 'status' => 201,
+                'success' => true,
                 'message' => $message,
                 'data' => $data,
                 'access_token' => [
@@ -49,6 +51,7 @@ class ResponsHelper
         return response()->json(
             [
                 'status' => 442,
+                'success' => false,
                 'message' => $message,
                 'data' => $error,
                 'access_token' => [
@@ -66,6 +69,7 @@ class ResponsHelper
         return response()->json(
             [
                 'status' => 409,
+                'success' => false,
                 'message' => $message,
                 'data' => $error,
                 'access_token' => [
@@ -81,6 +85,7 @@ class ResponsHelper
         return response()->json(
             [
                 'status' => 401,
+                'success' => false,
                 'message' => $message
             ]
         );
@@ -90,14 +95,16 @@ class ResponsHelper
         return response()->json(
             [
                 'status' => 404,
+                'success' => false,
                 'message' => $message
             ]
         );
     }
-    public static function customResponse($status, $message, $optional = []): JsonResponse
+    public static function customResponse($status, $success, $message, $optional = []): JsonResponse
     {
         $responseData = [
             'status' => $status,
+            'success' => $success,
             'message' => $message,
         ];
         if (isset($optional['data'])) {

@@ -22,9 +22,5 @@ class DatabaseSeeder extends Seeder
             MMenuGroupSeeder::class,
             MMenuGroupDetailSeeder::class
         ]);
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
     }
 }
