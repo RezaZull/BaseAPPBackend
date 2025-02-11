@@ -62,7 +62,11 @@ class MUserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return ResponsHelper::validatorError($validator->errors());
+            return ResponsHelper::customResponse(442, "Validation error", [
+                "error" => [
+                    $validator->errors()
+                ]
+            ]);
         }
 
         $user = MUser::create([
@@ -77,10 +81,13 @@ class MUserController extends Controller
         ]);
 
         if ($user) {
-            return ResponsHelper::successChangeData($user);
+            return ResponsHelper::customResponse('201', "Success Register", [
+                'data' => [
+                    'user' => $user
+                ]
+            ]);
         }
-
-        return ResponsHelper::conflictError("409");
+        return ResponsHelper::customResponse(409, "Conflict error");
 
     }
     public function login(Request $request)
@@ -97,14 +104,20 @@ class MUserController extends Controller
             return ResponsHelper::authError("Wrong Username or Password");
         }
 
-        return ResponsHelper::successGetData([
-            'user' => auth()->guard('api')->user(),
-            'token' => $token
-        ], "Success Login");
+        return ResponsHelper::customResponse(
+            200,
+            "success login",
+            [
+                'data' => [
+                    'user' => auth()->guard('api')->user(),
+                ],
+                'token' => $token
+            ]
+        );
     }
     public function logout()
     {
         $removeToken = JWTAuth::invalidate(JWTAuth::getToken());
-        return ResponsHelper::successGetData("Success logout");
+        return ResponsHelper::customResponse(200, "Success logout");
     }
 }
