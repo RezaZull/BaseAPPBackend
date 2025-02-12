@@ -72,7 +72,7 @@ class MUserController extends Controller
             return ResponsHelper::conflictError(409, "Conflict error");
         }
         if ($user) {
-            return ResponsHelper::successChangeData($user, "Success create Data Master User");
+            return ResponsHelper::successChangeData($user, "Success create data");
         }
     }
 
@@ -112,7 +112,7 @@ class MUserController extends Controller
         ]);
         if ($user) {
             DB::commit();
-            return ResponsHelper::successChangeData($user, "Success create Data Master User");
+            return ResponsHelper::successChangeData($user, "Success create data");
         }
         DB::rollBack();
         return ResponsHelper::conflictError(409, "Conflict error");
