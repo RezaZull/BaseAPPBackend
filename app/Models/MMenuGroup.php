@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MMenuGroup extends Model
@@ -20,4 +21,9 @@ class MMenuGroup extends Model
         "updated_by",
         "deleted_by"
     ];
+
+    public function menuGroupDetail(): HasMany
+    {
+        return $this->hasMany(MMenuGroupDetail::class, 'id_m_menu_groups', 'id');
+    }
 }

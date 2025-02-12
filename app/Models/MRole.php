@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MRole extends Model
@@ -19,4 +20,9 @@ class MRole extends Model
         "updated_by",
         "deleted_by"
     ];
+
+    public function roleGroup(): HasMany
+    {
+        return $this->hasMany(MMenuGroup::class, 'id_m_roles', 'id');
+    }
 }

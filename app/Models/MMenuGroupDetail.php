@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MMenuGroupDetail extends Model
@@ -32,4 +33,8 @@ class MMenuGroupDetail extends Model
         "updated_by",
         "deleted_by"
     ];
+    public function menu(): HasOne
+    {
+        return $this->hasOne(MMenu::class, 'id', 'id_m_menus');
+    }
 }

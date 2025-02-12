@@ -194,14 +194,14 @@ class MUserController extends Controller
         if (!$token = auth()->guard('api')->attempt($credential)) {
             return ResponsHelper::authError("Wrong Username or Password");
         }
-
+        $dataUser = MUser::with('role.roleGroup.menuGroupDetail.menu')->find(auth()->guard('api')->user()->id);
         return ResponsHelper::customResponse(
             200,
             true,
             "success login",
             [
                 'data' => [
-                    'user' => auth()->guard('api')->user(),
+                    'user' => $dataUser,
                 ],
                 'token' => $token
             ]

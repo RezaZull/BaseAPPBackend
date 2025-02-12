@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,6 +34,10 @@ class MUser extends Authenticatable implements JWTSubject
         "deleted_by"
     ];
 
+    public function role(): HasOne
+    {
+        return $this->hasOne(MRole::class, 'id', 'id_m_roles');
+    }
 
     /**
      * Get the attributes that should be cast.
