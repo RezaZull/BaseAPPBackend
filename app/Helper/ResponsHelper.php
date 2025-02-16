@@ -23,7 +23,8 @@ class ResponsHelper
                     'token_type' => 'bearer',
                     'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
                 ]
-            ]
+            ],
+            200
         );
     }
     public static function successChangeData($data, $message = "Successfully change data"): JsonResponse
@@ -41,7 +42,8 @@ class ResponsHelper
                     'token_type' => 'bearer',
                     'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
                 ]
-            ]
+            ],
+            201
         );
     }
     public static function validatorError($error, $message = "Validator Error"): JsonResponse
@@ -59,7 +61,8 @@ class ResponsHelper
                     'token_type' => 'bearer',
                     'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
                 ]
-            ]
+            ],
+            442
         );
     }
     public static function conflictError($error, $message = "Conflict Error"): JsonResponse
@@ -77,7 +80,8 @@ class ResponsHelper
                     'token_type' => 'bearer',
                     'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
                 ]
-            ]
+            ],
+            409
         );
     }
     public static function authError($message = "Auth Error"): JsonResponse
@@ -87,7 +91,8 @@ class ResponsHelper
                 'status' => 401,
                 'success' => false,
                 'message' => $message
-            ]
+            ],
+            401
         );
     }
     public static function notFoundData($message = "Data Not Found"): JsonResponse
@@ -97,7 +102,8 @@ class ResponsHelper
                 'status' => 404,
                 'success' => false,
                 'message' => $message
-            ]
+            ],
+            404
         );
     }
     public static function customResponse($status, $success, $message, $optional = []): JsonResponse
@@ -121,7 +127,8 @@ class ResponsHelper
             ];
         }
         return response()->json(
-            $responseData
+            $responseData,
+            $status
         );
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MMenu extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['name', 'description', 'obj_type', 'created_by', 'updated_by', 'deleted_by'];
+    protected $fillable = ['name', 'route', 'description', 'obj_type', 'created_by', 'updated_by', 'deleted_by'];
 
     protected $hidden = [
         "obj_type",

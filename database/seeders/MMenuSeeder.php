@@ -16,7 +16,16 @@ class MMenuSeeder extends Seeder
     {
         MMenu::insert([
             [
+                'name' => "Dashboard",
+                'route' => "dashboard",
+                'description' => "Dashboard User",
+                'obj_type' => '1',
+                'created_by' => "SYSTEM",
+                'created_at' => Carbon::now()
+            ],
+            [
                 'name' => "Master Menu",
+                'route' => "mastermenu",
                 'description' => "Master Menu",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
@@ -24,6 +33,7 @@ class MMenuSeeder extends Seeder
             ],
             [
                 'name' => "Master User",
+                'route' => "masteruser",
                 'description' => "Master User",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
@@ -31,13 +41,15 @@ class MMenuSeeder extends Seeder
             ],
             [
                 'name' => "Master Role",
+                'route' => "masterrole",
                 'description' => "Master Role User",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
                 'created_at' => Carbon::now()
             ],
             [
-                'name' => "Master Menu Grup",
+                'name' => "Master Menu Group",
+                'route' => "mastermenugroup",
                 'description' => "Master Role Menu Privilage",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",

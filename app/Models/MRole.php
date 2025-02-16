@@ -21,7 +21,7 @@ class MRole extends Model
         "deleted_by"
     ];
 
-    public function roleGroup(): HasMany
+    public function menuGroup(): HasMany
     {
         return $this->hasMany(MMenuGroup::class, 'id_m_roles', 'id');
     }

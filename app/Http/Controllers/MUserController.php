@@ -148,15 +148,13 @@ class MUserController extends Controller
             'last_name' => 'required',
             'username' => 'required|unique:m_users,username,NULL,NULL',
             'email' => 'required|email|unique:m_users,email,NULL,NULL',
-            'password' => 'required',
+            'password' => 'required|confirmed',
             'id_m_roles' => 'exists:m_roles,id|required',
         ]);
 
         if ($validator->fails()) {
             return ResponsHelper::customResponse(442, false, "Validation error", [
-                "error" => [
-                    $validator->errors()
-                ]
+                "error" => $validator->errors()
             ]);
         }
 
@@ -194,7 +192,7 @@ class MUserController extends Controller
         if (!$token = auth()->guard('api')->attempt($credential)) {
             return ResponsHelper::authError("Wrong Username or Password");
         }
-        $dataUser = MUser::with('role.roleGroup.menuGroupDetail.menu')->find(auth()->guard('api')->user()->id);
+        $dataUser = MUser::with('role.menuGroup.menuGroupDetail.menu')->find(auth()->guard('api')->user()->id);
         return ResponsHelper::customResponse(
             200,
             true,

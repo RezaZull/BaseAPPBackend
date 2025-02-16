@@ -40,6 +40,7 @@ class MMenuController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'route' => 'required',
             'description' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
@@ -51,6 +52,7 @@ class MMenuController extends Controller
         try {
             $mMenu = MMenu::create([
                 'name' => $request->name,
+                'route' => $request->route,
                 'description' => $request->description,
                 'obj_type' => $this->objTypes["M_Menu"],
                 'created_by' => $request->user_id,
@@ -80,6 +82,7 @@ class MMenuController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'route' => 'required',
             'description' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
@@ -91,6 +94,7 @@ class MMenuController extends Controller
         try {
             $mMenu = $mMenu->updateOrFail([
                 'name' => $request->name,
+                'route' => $request->route,
                 'description' => $request->description,
                 'updated_by' => $request->user_id,
             ]);

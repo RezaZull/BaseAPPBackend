@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('m_menus', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string("route");
             $table->string("description");
 
             $table->string("obj_type");
