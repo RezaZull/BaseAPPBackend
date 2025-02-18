@@ -33,7 +33,6 @@ class MMenuGroupDetail extends Model
         "created_by",
         "updated_by",
         "deleted_by",
-        "flag_active"
     ];
     public function menu(): HasOne
     {

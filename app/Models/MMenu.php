@@ -18,6 +18,5 @@ class MMenu extends Model
         "created_by",
         "updated_by",
         "deleted_by",
-        "flag_active"
     ];
 }

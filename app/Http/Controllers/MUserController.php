@@ -44,8 +44,8 @@ class MUserController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required|unique:m_users,username,NULL,NULL',
-            'email' => 'required|email|unique:m_users,email,NULL,NULL',
+            'username' => 'required|unique:m_users,username,NULL,NULL,deleted_at,NULL',
+            'email' => 'required|email|unique:m_users,email,NULL,NULL,deleted_at,NULL',
             'password' => 'required',
             'id_m_roles' => 'exists:m_roles,id|required',
             'flag_active' => 'required',
@@ -83,7 +83,7 @@ class MUserController extends Controller
      */
     public function show(MUser $mUser)
     {
-        return ResponsHelper::successGetData($mUser->with('role'));
+        return ResponsHelper::successGetData($mUser);
     }
 
     /**
@@ -94,8 +94,8 @@ class MUserController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required|unique:m_users,username,NULL,NULL',
-            'email' => 'required|email|unique:m_users,email,NULL,NULL',
+            'username' => "required|unique:m_users,username,$mUser->username,username,deleted_at,NULL",
+            'email' => "required|email|unique:m_users,username,$mUser->email,email,deleted_at,NULL",
             'id_m_roles' => 'exists:m_roles,id|required',
             'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
@@ -150,8 +150,8 @@ class MUserController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required|unique:m_users,username,NULL,NULL',
-            'email' => 'required|email|unique:m_users,email,NULL,NULL',
+            'username' => 'required|unique:m_users,username,NULL,NULL,deleted_at,NULL',//unique:table,column,except,id
+            'email' => 'required|email|unique:m_users,email,NULL,NULL,deleted_at,NULL',
             'password' => 'required|confirmed',
             'id_m_roles' => 'exists:m_roles,id|required',
         ]);
