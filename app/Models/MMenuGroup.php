@@ -10,7 +10,7 @@ class MMenuGroup extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['id_m_roles', 'name', 'obj_type', 'created_by', 'updated_by', 'deleted_by'];
+    protected $fillable = ['id_m_roles', 'name', 'obj_type', 'created_by', 'updated_by', 'deleted_by', 'flag_active'];
 
     protected $hidden = [
         "obj_type",
@@ -19,7 +19,8 @@ class MMenuGroup extends Model
         "deleted_at",
         "created_by",
         "updated_by",
-        "deleted_by"
+        "deleted_by",
+        "flag_active"
     ];
 
     public function menuGroupDetail(): HasMany

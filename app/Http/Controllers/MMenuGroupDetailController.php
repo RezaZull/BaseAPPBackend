@@ -48,6 +48,7 @@ class MMenuGroupDetailController extends Controller
             'flag_delete' => 'required|boolean',
             'flag_export' => 'required|boolean',
             'flag_import' => 'required|boolean',
+            'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
 
@@ -65,6 +66,7 @@ class MMenuGroupDetailController extends Controller
                 'flag_delete' => $request->flag_delete,
                 'flag_export' => $request->flag_export,
                 'flag_import' => $request->flag_import,
+                'flag_active' => $request->flag_active,
                 'obj_type' => $this->objTypes["M_Menu_Group"],
                 'created_by' => $request->user_id,
             ]);
@@ -100,6 +102,7 @@ class MMenuGroupDetailController extends Controller
             'flag_delete' => 'required|boolean',
             'flag_export' => 'required|boolean',
             'flag_import' => 'required|boolean',
+            'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
 
@@ -117,6 +120,7 @@ class MMenuGroupDetailController extends Controller
                 'flag_delete' => $request->flag_delete,
                 'flag_export' => $request->flag_export,
                 'flag_import' => $request->flag_import,
+                'flag_active' => $request->flag_active,
                 'updated_by' => $request->user_id,
             ]);
             DB::commit();

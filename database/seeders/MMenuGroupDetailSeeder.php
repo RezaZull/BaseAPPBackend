@@ -27,6 +27,7 @@ class MMenuGroupDetailSeeder extends Seeder
                 'flag_delete' => true,
                 'flag_export' => true,
                 'flag_import' => true,
+                'flag_active' => true,
                 'created_by' => 'SYSTEM',
                 'obj_type' => '4',
                 'created_at' => Carbon::now()

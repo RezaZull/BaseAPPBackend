@@ -21,7 +21,8 @@ class MMenuGroupDetail extends Model
         'obj_type',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
+        'flag_active'
     ];
 
     protected $hidden = [
@@ -31,7 +32,8 @@ class MMenuGroupDetail extends Model
         "deleted_at",
         "created_by",
         "updated_by",
-        "deleted_by"
+        "deleted_by",
+        "flag_active"
     ];
     public function menu(): HasOne
     {

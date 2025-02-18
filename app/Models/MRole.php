@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MRole extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['name', 'obj_type', 'created_by', 'updated_by', 'deleted_by'];
+    protected $fillable = ['name', 'obj_type', 'created_by', 'updated_by', 'deleted_by', 'flag_active'];
 
     protected $hidden = [
         "obj_type",
@@ -18,7 +18,8 @@ class MRole extends Model
         "deleted_at",
         "created_by",
         "updated_by",
-        "deleted_by"
+        "deleted_by",
+        "flag_active"
     ];
 
     public function menuGroup(): HasMany

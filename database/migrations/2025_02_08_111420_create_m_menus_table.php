@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string("description");
 
             $table->string("obj_type");
+            $table->boolean("flag_active");
             $table->timestamps();
             $table->softDeletesDatetime();
             $table->string("created_by");

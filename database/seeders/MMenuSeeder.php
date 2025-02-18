@@ -21,6 +21,7 @@ class MMenuSeeder extends Seeder
                 'description' => "Dashboard User",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
+                'flag_active' => true,
                 'created_at' => Carbon::now()
             ],
             [
@@ -29,6 +30,7 @@ class MMenuSeeder extends Seeder
                 'description' => "Master Menu",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
+                'flag_active' => true,
                 'created_at' => Carbon::now()
             ],
             [
@@ -37,6 +39,7 @@ class MMenuSeeder extends Seeder
                 'description' => "Master User",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
+                'flag_active' => true,
                 'created_at' => Carbon::now()
             ],
             [
@@ -45,6 +48,7 @@ class MMenuSeeder extends Seeder
                 'description' => "Master Role User",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
+                'flag_active' => true,
                 'created_at' => Carbon::now()
             ],
             [
@@ -53,6 +57,7 @@ class MMenuSeeder extends Seeder
                 'description' => "Master Role Menu Privilage",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
+                'flag_active' => true,
                 'created_at' => Carbon::now()
             ],
         ]);

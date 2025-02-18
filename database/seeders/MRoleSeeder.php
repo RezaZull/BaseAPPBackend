@@ -19,12 +19,14 @@ class MRoleSeeder extends Seeder
                 'name' => "Admin",
                 'obj_type' => '2',
                 'created_by' => "SYSTEM",
+                'flag_active' => true,
                 'created_at' => Carbon::now()
             ],
             [
                 'name' => "User",
                 'obj_type' => '2',
                 'created_by' => "SYSTEM",
+                'flag_active' => true,
                 'created_at' => Carbon::now()
             ],
         ]);

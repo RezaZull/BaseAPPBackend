@@ -23,7 +23,7 @@ class MUserController extends Controller
         $orderDir = $request->query('orderDir');
 
         $pagination = $request->query('pagination');
-        $MUser = new MUser();
+        $MUser = MUser::with('role');
         if (isset($searchParam) && isset($searchValue)) {
             $MUser = $MUser->where($searchParam, 'LIKE', "%$searchValue%");
         }
@@ -48,6 +48,7 @@ class MUserController extends Controller
             'email' => 'required|email|unique:m_users,email,NULL,NULL',
             'password' => 'required',
             'id_m_roles' => 'exists:m_roles,id|required',
+            'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
 
@@ -64,6 +65,7 @@ class MUserController extends Controller
                 'password' => Hash::make($request->password),
                 'id_m_roles' => $request->id_m_roles,
                 'obj_type' => $this->objTypes["M_User"],
+                'flag_active' => $request->flag_active,
                 'created_by' => $request->user_id,
             ]);
             DB::commit();
@@ -81,7 +83,7 @@ class MUserController extends Controller
      */
     public function show(MUser $mUser)
     {
-        return ResponsHelper::successGetData($mUser);
+        return ResponsHelper::successGetData($mUser->with('role'));
     }
 
     /**
@@ -95,6 +97,7 @@ class MUserController extends Controller
             'username' => 'required|unique:m_users,username,NULL,NULL',
             'email' => 'required|email|unique:m_users,email,NULL,NULL',
             'id_m_roles' => 'exists:m_roles,id|required',
+            'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
 
@@ -107,6 +110,7 @@ class MUserController extends Controller
             'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
+            'flag_active' => $request->flag_active,
             'id_m_roles' => $request->id_m_roles,
             'updated_by' => $request->user_id,
         ]);
@@ -166,6 +170,7 @@ class MUserController extends Controller
             'password' => Hash::make($request->password),
             'id_m_roles' => $request->id_m_roles,
             'obj_type' => $this->objTypes["M_User"],
+            'flag_active' => true,
             'created_by' => "SYSTEM",
         ]);
 

@@ -40,6 +40,7 @@ class MMenuGroupController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'flag_active' => 'required',
             'id_m_roles' => 'required|exists:m_roles,id',
             'user_id' => 'required|exists:m_users,id'
         ]);
@@ -52,6 +53,7 @@ class MMenuGroupController extends Controller
             $MMenuGroup = MMenuGroup::create([
                 'name' => $request->name,
                 'id_m_roles' => $request->id_m_roles,
+                'flag_active' => $request->flag_active,
                 'obj_type' => $this->objTypes["M_Menu_Group"],
                 'created_by' => $request->user_id,
             ]);
@@ -80,6 +82,7 @@ class MMenuGroupController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'flag_active' => 'required',
             'id_m_roles' => 'required|exists:m_roles,id',
             'user_id' => 'required|exists:m_users,id'
         ]);
@@ -91,6 +94,7 @@ class MMenuGroupController extends Controller
         try {
             $mMenuGroup = $mMenuGroup->updateOrFail([
                 'name' => $request->name,
+                'flag_active' => $request->flag_active,
                 'id_m_roles' => $request->id_m_roles,
                 'updated_by' => $request->user_id,
             ]);

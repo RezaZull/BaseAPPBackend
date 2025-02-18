@@ -42,6 +42,7 @@ class MMenuController extends Controller
             'name' => 'required',
             'route' => 'required',
             'description' => 'required',
+            'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
 
@@ -53,6 +54,7 @@ class MMenuController extends Controller
             $mMenu = MMenu::create([
                 'name' => $request->name,
                 'route' => $request->route,
+                'flag_active' => $request->flag_active,
                 'description' => $request->description,
                 'obj_type' => $this->objTypes["M_Menu"],
                 'created_by' => $request->user_id,
@@ -84,6 +86,7 @@ class MMenuController extends Controller
             'name' => 'required',
             'route' => 'required',
             'description' => 'required',
+            'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
 
@@ -95,6 +98,7 @@ class MMenuController extends Controller
             $mMenu = $mMenu->updateOrFail([
                 'name' => $request->name,
                 'route' => $request->route,
+                'flag_active' => $request->flag_active,
                 'description' => $request->description,
                 'updated_by' => $request->user_id,
             ]);

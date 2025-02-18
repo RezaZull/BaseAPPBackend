@@ -40,6 +40,7 @@ class MRoleController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
 
@@ -50,6 +51,7 @@ class MRoleController extends Controller
         try {
             $mRole = MRole::create([
                 'name' => $request->name,
+                'flag_active' => $request->flag_active,
                 'obj_type' => $this->objTypes["M_Role"],
                 'created_by' => $request->user_id,
             ]);
@@ -78,6 +80,7 @@ class MRoleController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'flag_active' => 'required',
             'user_id' => 'required|exists:m_users,id'
         ]);
 
@@ -88,6 +91,7 @@ class MRoleController extends Controller
         try {
             $mRole = $mRole->updateOrFail([
                 'name' => $request->name,
+                'flag_active' => $request->flag_active,
                 'updated_by' => $request->user_id,
             ]);
             DB::commit();

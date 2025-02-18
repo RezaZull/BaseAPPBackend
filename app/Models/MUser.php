@@ -21,7 +21,8 @@ class MUser extends Authenticatable implements JWTSubject
         'obj_type',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
+        'flag_active'
     ];
     protected $hidden = [
         'password',
@@ -31,7 +32,8 @@ class MUser extends Authenticatable implements JWTSubject
         "deleted_at",
         "created_by",
         "updated_by",
-        "deleted_by"
+        "deleted_by",
+        "flag_active"
     ];
 
     public function role(): HasOne
