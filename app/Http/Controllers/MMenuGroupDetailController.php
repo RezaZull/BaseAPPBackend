@@ -22,7 +22,7 @@ class MMenuGroupDetailController extends Controller
         $orderDir = $request->query('orderDir');
 
         $pagination = $request->query('pagination');
-        $MMenuGroupDetail = new MMenuGroupDetail();
+        $MMenuGroupDetail = MMenuGroupDetail::with('menu');
         if (isset($searchParam) && isset($searchValue)) {
             $MMenuGroupDetail = $MMenuGroupDetail->where($searchParam, 'LIKE', "%$searchValue%");
         }

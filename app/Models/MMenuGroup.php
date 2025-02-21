@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MMenuGroup extends Model
@@ -25,5 +26,9 @@ class MMenuGroup extends Model
     public function menuGroupDetail(): HasMany
     {
         return $this->hasMany(MMenuGroupDetail::class, 'id_m_menu_groups', 'id');
+    }
+    public function role(): HasOne
+    {
+        return $this->hasOne(MRole::class, 'id', 'id_m_roles');
     }
 }

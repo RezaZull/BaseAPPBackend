@@ -21,7 +21,7 @@ class MMenuGroupController extends Controller
         $orderDir = $request->query('orderDir');
 
         $pagination = $request->query('pagination');
-        $MMenuGroup = new MMenuGroup();
+        $MMenuGroup = MMenuGroup::with('role');
         if (isset($searchParam) && isset($searchValue)) {
             $MMenuGroup = $MMenuGroup->where($searchParam, 'LIKE', "%$searchValue%");
         }
@@ -72,7 +72,7 @@ class MMenuGroupController extends Controller
      */
     public function show(MMenuGroup $mMenuGroup)
     {
-        return ResponsHelper::successGetData($mMenuGroup);
+        return ResponsHelper::successGetData($mMenuGroup->load('role'));
     }
 
     /**

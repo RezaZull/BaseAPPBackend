@@ -21,7 +21,7 @@ Route::middleware([JwtMiddleware::class])->group(function () {
         'mUser' => MUserController::class,
         'mMenu' => MMenuController::class,
         'mRole' => MRoleController::class,
-        'mMenugroup' => MMenuGroupController::class,
-        'mMenugroupdetail' => MMenuGroupDetailController::class,
+        'mMenuGroup' => MMenuGroupController::class,
+        'mMenuGroupDetail' => MMenuGroupDetailController::class,
     ]);
 });
