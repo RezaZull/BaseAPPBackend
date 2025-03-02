@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\ResponsHelper;
+use App\Models\AppSetting;
 use App\Models\MUser;
 use DB;
 use Hash;
@@ -153,7 +154,6 @@ class MUserController extends Controller
             'username' => 'required|unique:m_users,username,NULL,NULL,deleted_at,NULL',//unique:table,column,except,id
             'email' => 'required|email|unique:m_users,email,NULL,NULL,deleted_at,NULL',
             'password' => 'required|confirmed',
-            'id_m_roles' => 'exists:m_roles,id|required',
         ]);
 
         if ($validator->fails()) {
@@ -161,14 +161,14 @@ class MUserController extends Controller
                 "error" => $validator->errors()
             ]);
         }
-
+        $defaultRole = AppSetting::where('code', '=', 'S01')->first();
         $user = MUser::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'id_m_roles' => $request->id_m_roles,
+            'id_m_roles' => $defaultRole->value,
             'obj_type' => $this->objTypes["M_User"],
             'flag_active' => true,
             'created_by' => "SYSTEM",
@@ -197,7 +197,25 @@ class MUserController extends Controller
         if (!$token = auth()->guard('api')->attempt($credential)) {
             return ResponsHelper::authError("Wrong Username or Password");
         }
-        $dataUser = MUser::with('role.menuGroup.menuGroupDetail.menu')->find(auth()->guard('api')->user()->id);
+        $dataUser = MUser::with([
+            'role' => function ($query) {
+                $query->where('flag_active', '=', 'true');
+                $query->with([
+                    'menuGroup' => function ($query) {
+                        $query->where('flag_active', '=', 'true');
+                        $query->with([
+                            'menuGroupDetail' => function ($query) {
+                                $query->where([
+                                    ['flag_active', '=', 'true'],
+                                    ['flag_read', '=', 'true']
+                                ]);
+                                $query->with('menu');
+                            }
+                        ]);
+                    }
+                ]);
+            }
+        ])->find(auth()->guard('api')->user()->id);
         return ResponsHelper::customResponse(
             200,
             true,

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\MMenuController;
 use App\Http\Controllers\MMenuGroupController;
 use App\Http\Controllers\MMenuGroupDetailController;
@@ -17,11 +18,13 @@ Route::post("/register", [MUserController::class, "register"])->name("register")
 Route::post("/login", [MUserController::class, "login"])->name("login");
 Route::middleware([JwtMiddleware::class])->group(function () {
     Route::post("/logout", [MUserController::class, "logout"])->name("logout");
+    Route::put("appSettingBulk/update", [AppSettingController::class, "BulkUpdate"])->name("appSetting.bulkUpdate");
     Route::apiResources([
         'mUser' => MUserController::class,
         'mMenu' => MMenuController::class,
         'mRole' => MRoleController::class,
         'mMenuGroup' => MMenuGroupController::class,
         'mMenuGroupDetail' => MMenuGroupDetailController::class,
+        'appSetting' => AppSettingController::class,
     ]);
 });

@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             MRoleSeeder::class,
             MMenuSeeder::class,
             MMenuGroupSeeder::class,
-            MMenuGroupDetailSeeder::class
+            MMenuGroupDetailSeeder::class,
+            AppSettingSeeder::class
         ]);
     }
 }

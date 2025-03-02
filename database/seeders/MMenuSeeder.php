@@ -54,7 +54,16 @@ class MMenuSeeder extends Seeder
             [
                 'name' => "Master Menu Group",
                 'route' => "mastermenugroup",
-                'description' => "Master Role Menu Privilage",
+                'description' => "Master Menu group",
+                'obj_type' => '1',
+                'created_by' => "SYSTEM",
+                'flag_active' => true,
+                'created_at' => Carbon::now()
+            ],
+            [
+                'name' => "APP Setting",
+                'route' => "appsetting",
+                'description' => "App Setting",
                 'obj_type' => '1',
                 'created_by' => "SYSTEM",
                 'flag_active' => true,
