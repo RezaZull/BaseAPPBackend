@@ -22,7 +22,8 @@ class MUser extends Authenticatable implements JWTSubject
         'created_by',
         'updated_by',
         'deleted_by',
-        'flag_active'
+        'flag_active',
+        'img_path'
     ];
     protected $hidden = [
         'password',

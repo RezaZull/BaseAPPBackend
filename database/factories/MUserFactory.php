@@ -26,6 +26,7 @@ class MUserFactory extends Factory
             'id_m_roles' => rand(1, 2),
             'obj_type' => 5,
             'created_by' => "SYSTEM",
+            'img_path' => "storage/images/profile/images.webp",
             'flag_active' => true,
         ];
     }

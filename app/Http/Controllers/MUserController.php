@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Helper\ResponsHelper;
 use App\Models\AppSetting;
 use App\Models\MUser;
+use Buglinjo\LaravelWebp\Facades\Webp;
 use DB;
 use Hash;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Validator;
 
@@ -68,6 +71,7 @@ class MUserController extends Controller
                 'obj_type' => $this->objTypes["M_User"],
                 'flag_active' => $request->flag_active,
                 'created_by' => $request->user_id,
+                'img_path' => "storage/images/profile/images.webp"
             ]);
             DB::commit();
         } catch (\Throwable $th) {
@@ -84,7 +88,26 @@ class MUserController extends Controller
      */
     public function show(MUser $mUser)
     {
-        return ResponsHelper::successGetData($mUser);
+        $data = MUser::with([
+            'role' => function ($query) {
+                $query->where('flag_active', '=', 'true');
+                $query->with([
+                    'menuGroup' => function ($query) {
+                        $query->where('flag_active', '=', 'true');
+                        $query->with([
+                            'menuGroupDetail' => function ($query) {
+                                $query->where([
+                                    ['flag_active', '=', 'true'],
+                                    ['flag_read', '=', 'true']
+                                ]);
+                                $query->with('menu');
+                            }
+                        ]);
+                    }
+                ]);
+            }
+        ])->find($mUser->id);
+        return ResponsHelper::successGetData($data);
     }
 
     /**
@@ -172,6 +195,7 @@ class MUserController extends Controller
             'obj_type' => $this->objTypes["M_User"],
             'flag_active' => true,
             'created_by' => "SYSTEM",
+            'img_path' => "storage/images/profile/images.webp"
         ]);
 
         if ($user) {
@@ -232,5 +256,59 @@ class MUserController extends Controller
     {
         $removeToken = JWTAuth::invalidate(JWTAuth::getToken());
         return ResponsHelper::customResponse(200, true, "Success logout");
+    }
+
+    public function changePassword(MUser $mUser, Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+            'user_id' => 'required|exists:m_users,id'
+        ]);
+        if ($validator->fails()) {
+            return ResponsHelper::customResponse(442, false, "Validation error", [
+                "error" => $validator->errors()
+            ]);
+        }
+        if (!(Hash::check($request->old_password, $mUser->password))) {
+            return ResponsHelper::customResponse(442, false, "Validation error", [
+                "error" => [
+                    "old_password" => [
+                        "incorrect old password"
+                    ]
+                ]
+            ]);
+        }
+        $mUser->updateOrFail([
+            'password' => Hash::make($request->new_password),
+            'updated_by' => $request->user_id,
+        ]);
+        return ResponsHelper::successChangeData($mUser, "Success Change Password");
+    }
+
+    public function uploadPicture(MUser $mUser, Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'img_file' => 'required|image|mimes:jpeg,jpg,png|max:4096',
+            'user_id' => 'required|exists:m_users,id'
+        ]);
+        if ($validator->fails()) {
+            return ResponsHelper::customResponse(442, false, "Validation error", [
+                "error" => $validator->errors()
+            ]);
+        }
+        if ($mUser->img_path != 'storage/images/profile/images.webp') {
+            Storage::delete(public_path($mUser->img_path));
+        }
+        $webp = Webp::make($request->file('img_file'));
+        $newPath = "storage/images/profile/" . $request->file('img_file')->hashName() . ".webp";
+        if ($webp->save(public_path($newPath))) {
+            $mUser->updateOrFail([
+                'img_path' => $newPath,
+                'updated_by' => $request->user_id,
+            ]);
+            return ResponsHelper::successChangeData($mUser, "Success Change Picture");
+        }
+        return ResponsHelper::conflictError(409, "Failed change picture");
     }
 }

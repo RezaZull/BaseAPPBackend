@@ -18,7 +18,9 @@ Route::post("/register", [MUserController::class, "register"])->name("register")
 Route::post("/login", [MUserController::class, "login"])->name("login");
 Route::middleware([JwtMiddleware::class])->group(function () {
     Route::post("/logout", [MUserController::class, "logout"])->name("logout");
-    Route::put("appSettingBulk/update", [AppSettingController::class, "BulkUpdate"])->name("appSetting.bulkUpdate");
+    Route::post("/mUser/uploadPicture/{mUser}", [MUserController::class, "uploadPicture"])->name("mUser.uploadPicture");
+    Route::post("/mUser/changePassword/{mUser}", [MUserController::class, "changePassword"])->name("mUser.changePassword");
+    Route::put("/appSettingBulk/update", [AppSettingController::class, "bulkUpdate"])->name("appSetting.bulkUpdate");
     Route::apiResources([
         'mUser' => MUserController::class,
         'mMenu' => MMenuController::class,

@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string("email");
             $table->string("password");
             $table->unsignedBigInteger("id_m_roles");
+            $table->string("img_path");
 
             $table->string("obj_type");
             $table->boolean("flag_active");

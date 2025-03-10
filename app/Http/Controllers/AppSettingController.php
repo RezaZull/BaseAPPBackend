@@ -68,7 +68,7 @@ class AppSettingController extends Controller
             return ResponsHelper::successChangeData($appSetting, "Success update data");
         }
     }
-    public function BulkUpdate(Request $request)
+    public function bulkUpdate(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'data.*.value' => 'required',
